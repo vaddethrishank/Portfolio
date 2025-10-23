@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixel Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              'press-start': ['"Press Start 2P"', 'cursive'],
+            },
+            colors: {
+              'pixel-red': '#FF0000',
+              'pixel-black': '#000000',
+              'pixel-white': '#FFFFFF',
+              'pixel-gray-bg': '#2d2d2d',
+              'pixel-gray-text': '#c7c7c7',
+              'pixel-gray-accent': '#00c2a8',
+            },
+            animation: {
+              'fade-in': 'fadeIn 1s ease-out forwards',
+              'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+              'fill-bar': 'fillBar 1.5s ease-out forwards',
+              'pixel-glow': 'pixelGlow 2s infinite alternate',
+              'pixel-shake': 'pixelShake 0.5s infinite',
+              'fast-pulse': 'fastPulse 0.8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              fillBar: {
+                '0%': { width: '0%' },
+                '100%': { width: 'var(--skill-level, 0%)' },
+              },
+              pixelGlow: {
+                '0%': { textShadow: '0 0 2px #FF0000' },
+                '100%': { textShadow: '0 0 10px #FF0000, 0 0 15px #FF0000' },
+              },
+              pixelShake: {
+                '0%, 100%': { transform: 'translateX(0)' },
+                '25%': { transform: 'translateX(-1px)' },
+                '50%': { transform: 'translateY(1px)' },
+                '75%': { transform: 'translateX(1px)' },
+              },
+              fastPulse: {
+                '50%': { opacity: '0.5' },
+              },
+            },
+            boxShadow: {
+              'pixel-red': '4px 4px 0px #FF0000',
+              'pixel-red-sm': '2px 2px 0px #FF0000',
+              'pixel-gray-accent': '4px 4px 0px #00c2a8',
+              'pixel-gray-accent-sm': '2px 2px 0px #00c2a8',
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'Press Start 2P', cursive;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+      body::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, and Opera */
+      }
+      /* Default (Gray theme) */
+      .glassmorphic {
+        background: rgba(200, 200, 200, 0.05);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(200, 200, 200, 0.1);
+      }
+      /* Dark theme override */
+      .dark .glassmorphic {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-pixel-black text-pixel-white">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

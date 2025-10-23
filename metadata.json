@@ -1,0 +1,5 @@
+{
+  "name": "Pixel Portfolio",
+  "description": "A retro pixel-art themed portfolio website built with React and Tailwind CSS, featuring glassmorphism, smooth animations, and a horizontal project showcase.",
+  "requestFramePermissions": []
+}
