@@ -87,7 +87,7 @@ const Header: React.FC = () => {
   const socialLinks = [
       { href: 'https://github.com/vaddethrishank', icon: <GithubIcon />, label: 'GitHub' },
       { href: 'https://www.linkedin.com/in/vaddethrishank/', icon: <LinkedinIcon />, label: 'LinkedIn' },
-      { href: '#', icon: <ResumeIcon />, label: 'Resume' },
+      { href: 'https://drive.google.com/file/d/1-UQf4LIUxKkFqIIhw6jwJfx7DtnIMTmJ/view?usp=sharing', icon: <ResumeIcon />, label: 'Resume' },
   ];
 
   const baseClasses = 'fixed top-0 left-0 w-full z-40 transition-all duration-300 font-press-start';

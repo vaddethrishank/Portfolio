@@ -103,7 +103,7 @@ useEffect(() => {
   const socialLinks = [
       { href: 'https://github.com/vaddethrishank', icon: <GithubIcon />, label: 'GitHub', delay: '300ms' },
       { href: 'https://www.linkedin.com/in/vaddethrishank/', icon: <LinkedinIcon />, label: 'LinkedIn', delay: '400ms' },
-      { href: '#', icon: <ResumeIcon />, label: 'Resume', delay: '500ms' },
+      { href: 'https://drive.google.com/file/d/1-UQf4LIUxKkFqIIhw6jwJfx7DtnIMTmJ/view?usp=sharing', icon: <ResumeIcon />, label: 'Resume', delay: '500ms' },
   ];
 
   return (
