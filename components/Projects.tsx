@@ -6,27 +6,27 @@ const projects = [
   {
     title: 'Gol-Gol ',
     description: 'Full-stack ride-sharing platform to book/find rides based on similar routes. Features smart route-matching using geolocation and distance heuristics, OTP login, real-time updates via WebSockets, and in-app chat for matched users.',
-    imageUrl: '../public/golgol.png',
+    imageUrl: '../golgol.png',
     liveUrl: 'https://gol-gol-iota.vercel.app/',
     repoUrl: 'https://github.com/vaddethrishank/Gol-Gol.git',
   },
   {
 title: 'FormMind – RAG-Powered Form Assistant',
     description: 'Chrome extension that extracts form questions and generates copy-ready answers using RAG with resume data. Integrated Google Gemini 2.0 Flash LLM, ChromaDB, embeddings, and a Flask backend for handling form data and interactive queries.',
-    imageUrl: '../public/formmind.png',
+    imageUrl: '../formmind.png',
     
     repoUrl: 'https://github.com/vaddethrishank/FormMind.git',
   },
   {
     title: 'AI Resume Job Matcher',
     description: 'AI system to parse resumes, search jobs, rank them, and generate personalized cover letters. Uses PyPDFLoader, Tavily API, LangChain, and LangGraph. Deployed on Google Colab integrating parsing, search, and cover letter generation.',
-    imageUrl: '../public/jobagent.png',
+    imageUrl: '../jobagent.png',
     repoUrl: 'https://github.com/vaddethrishank/JOB_SEARCH_AGENT.git',
   },
   {
     title: 'Simon Game',
     description: 'Interactive memory-based game inspired by the classic Simon Game. Implements dynamic sequence generation, user input validation with increasing difficulty, and enhanced gameplay with sound effects and animations.',
-    imageUrl: '../public/simon.png',
+    imageUrl: '../simon.png',
     liveUrl: 'https://vaddethrishank.github.io/Simon-Game/',
     repoUrl: 'https://github.com/vaddethrishank/Simon-Game.git',
   }
