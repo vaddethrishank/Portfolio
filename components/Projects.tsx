@@ -1,181 +1,101 @@
-import React, { useState } from 'react';
-import ProjectCard from './ProjectCard';
+import React from 'react';
 import useOnScreen from '../hooks/useOnScreen';
 
 const projects = [
-
-    {
+  {
     title: 'Kiwin',
-    description: 'Kiwin is a full-stack AI platform that empowers users to create and deploy custom AI assistants with no coding required. Built using Next.js, FastAPI, Supabase, pgvector, and Google Gemini, it supports document ingestion, semantic search, Retrieval-Augmented Generation (RAG), and tool integrations. Kiwin enables businesses and individuals to build domain-specific AI agents for customer support, knowledge management, research, and workflow automation in minutes.',
+    description: 'Full-stack AI platform that empowers users to create and deploy custom AI assistants with no coding required. Built using Next.js, FastAPI, Supabase, pgvector, and Google Gemini.',
     imageUrl: '/kiwin.png',
     liveUrl: 'https://kiwin-v2.vercel.app/',
     repoUrl: 'https://github.com/vaddethrishank/Kiwin',
   },
   {
-    title: 'Gol-Gol ',
-    description: 'Full-stack ride-sharing platform to book/find rides based on similar routes. Features smart route-matching using geolocation and distance heuristics, OTP login, real-time updates via WebSockets, and in-app chat for matched users.',
+    title: 'Gol-Gol',
+    description: 'Full-stack ride-sharing platform to book/find rides based on similar routes. Features smart route-matching using geolocation and distance heuristics.',
     imageUrl: '/golgol.png',
     liveUrl: 'https://gol-gol-iota.vercel.app/',
     repoUrl: 'https://github.com/vaddethrishank/Gol-Gol.git',
   },
   {
-title: 'FormMind – RAG-Powered Form Assistant',
-    description: 'Chrome extension that extracts form questions and generates copy-ready answers using RAG with resume data. Integrated Google Gemini 2.0 Flash LLM, ChromaDB, embeddings, and a Flask backend for handling form data and interactive queries.',
+    title: 'FormMind – RAG-Powered Form Assistant',
+    description: 'Chrome extension that extracts form questions and generates copy-ready answers using RAG with resume data.',
     imageUrl: '/formmind.png',
-    
     repoUrl: 'https://github.com/vaddethrishank/FormMind.git',
   },
   {
     title: 'AI Resume Job Matcher',
-    description: 'AI system to parse resumes, search jobs, rank them, and generate personalized cover letters. Uses PyPDFLoader, Tavily API, LangChain, and LangGraph. Deployed on Google Colab integrating parsing, search, and cover letter generation.',
+    description: 'AI system to parse resumes, search jobs, rank them, and generate personalized cover letters using PyPDFLoader, Tavily API, LangChain.',
     imageUrl: '/jobagent.png',
     repoUrl: 'https://github.com/vaddethrishank/JOB_SEARCH_AGENT.git',
   },
   {
     title: 'Simon Game',
-    description: 'Interactive memory-based game inspired by the classic Simon Game. Implements dynamic sequence generation, user input validation with increasing difficulty, and enhanced gameplay with sound effects and animations.',
+    description: 'Interactive memory-based game inspired by the classic Simon Game. Implements dynamic sequence generation and user input validation.',
     imageUrl: '/simon.png',
     liveUrl: 'https://vaddethrishank.github.io/Simon-Game/',
     repoUrl: 'https://github.com/vaddethrishank/Simon-Game.git',
   }
-  
-
 ];
 
+const ProjectItem: React.FC<{ project: any; index: number }> = ({ project, index }) => {
+  const [ref, isVisible] = useOnScreen<HTMLDivElement>({ threshold: 0.1 });
 
-const LeftArrow = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="square" strokeLinejoin="miter">
-        <polyline points="15 18 9 12 15 6"></polyline>
-    </svg>
-);
+  return (
+    <div 
+      ref={ref}
+      className={`mb-16 transform transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
+    >
+      <div className="flex flex-col md:flex-row gap-6 items-start">
+        <div className="w-full md:w-1/2 group relative border border-term-green/30 p-1 bg-black shadow-glow-sm hover:shadow-glow transition-all duration-300">
+            {/* Terminal scanline overlay on image */}
+            <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] pointer-events-none z-10 opacity-30 group-hover:opacity-10 transition-opacity"></div>
+            
+            <img 
+                src={project.imageUrl} 
+                alt={project.title} 
+                className="w-full h-auto object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 will-change-transform"
+            />
+            <div className="absolute top-2 left-2 bg-black text-term-green text-xs font-mono px-2 py-1 z-20 border border-term-green/50">
+               [RENDER_IMG: OK]
+            </div>
+        </div>
 
-const RightArrow = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="square" strokeLinejoin="miter">
-        <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
-);
+        <div className="w-full md:w-1/2 space-y-4">
+            <h3 className="text-2xl md:text-3xl text-term-green drop-shadow-glow uppercase tracking-widest">{project.title}</h3>
+            
+            <div className="text-term-gray text-lg leading-relaxed border-l-2 border-term-green/30 pl-4 py-1">
+                {project.description}
+            </div>
+
+            <div className="flex gap-4 pt-4">
+                {project.liveUrl && (
+                    <a href={project.liveUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
+                        <span className="text-term-green">➜</span> [LIVE DEMO]
+                    </a>
+                )}
+                {project.repoUrl && (
+                    <a href={project.repoUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
+                        <span className="text-term-green">➜</span> [SOURCE CODE]
+                    </a>
+                )}
+            </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Projects: React.FC = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [touchStart, setTouchStart] = useState(0);
-    const totalProjects = projects.length;
-    const [ref, isVisible] = useOnScreen<HTMLElement>({ threshold: 0.2 });
-    
-    const minSwipeDistance = 50;
-
-    const onTouchStart = (e: React.TouchEvent) => {
-        setTouchStart(e.targetTouches[0].clientX);
-    };
-    
-    const onTouchEnd = (e: React.TouchEvent) => {
-        if (touchStart === 0) return;
-        
-        const touchEnd = e.changedTouches[0].clientX;
-        const distance = touchStart - touchEnd;
-        const isLeftSwipe = distance > minSwipeDistance;
-        const isRightSwipe = distance < -minSwipeDistance;
-
-        if (isLeftSwipe) {
-            goToNext();
-        } else if (isRightSwipe) {
-            goToPrevious();
-        }
-
-        setTouchStart(0); // Reset touch start position
-    };
-
-    const goToPrevious = () => {
-        const isFirstSlide = currentIndex === 0;
-        const newIndex = isFirstSlide ? totalProjects - 1 : currentIndex - 1;
-        setCurrentIndex(newIndex);
-    };
-
-    const goToNext = () => {
-        const isLastSlide = currentIndex === totalProjects - 1;
-        const newIndex = isLastSlide ? 0 : currentIndex + 1;
-        setCurrentIndex(newIndex);
-    };
-
-    const getCardStyle = (index: number) => {
-        let offset = index - currentIndex;
-        if (offset > totalProjects / 2) offset -= totalProjects;
-        if (offset < -totalProjects / 2) offset += totalProjects;
-
-        const isCenter = offset === 0;
-        const isSide = Math.abs(offset) === 1;
-
-        const transform = `
-            rotateY(${offset * -35}deg)
-            translateX(${offset * 70}%)
-            translateZ(${isCenter ? '0px' : '-200px'})
-            scale(${isCenter ? 1 : 0.8})
-        `;
-        
-        let opacity = 0;
-        if (isCenter) opacity = 1;
-        else if (isSide) opacity = 0.7;
-
-        const zIndex = totalProjects - Math.abs(offset);
-
-        return {
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            transform,
-            opacity,
-            zIndex,
-            transition: 'transform 0.5s ease, opacity 0.5s ease',
-            pointerEvents: isCenter ? 'auto' : 'none',
-        } as React.CSSProperties;
-    };
-
     return (
-        <section ref={ref} id="projects" className="min-h-screen py-20 flex flex-col justify-center items-center bg-pixel-gray-text/5 dark:bg-black/20 overflow-hidden">
-             <div className={`container mx-auto px-4 text-center mb-12 transform transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                <h2 className="text-3xl md:text-4xl font-press-start mb-4">PROJECTS.EXE</h2>
-                <div className="w-20 h-1 bg-pixel-gray-accent dark:bg-pixel-red mx-auto"></div>
+        <section id="projects" className="py-20">
+            <div className="mb-12">
+                <span className="text-term-gray">root@system:</span><span className="text-term-green drop-shadow-glow">~/projects</span>$ ./list_all.sh
             </div>
             
-            <div className={`relative w-full max-w-5xl flex items-center justify-center h-[30rem] transform transition-all duration-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`} style={{ transitionDelay: '200ms' }}>
-                <button 
-                    onClick={goToPrevious}
-                    className="hidden md:block absolute md:-left-16 z-20 p-2 border-2 rounded-none
-                               border-pixel-gray-accent text-pixel-gray-accent
-                               dark:border-pixel-red dark:text-pixel-red
-                               hover:bg-pixel-gray-accent dark:hover:bg-pixel-red
-                               hover:text-pixel-black dark:hover:text-black
-                               transition-all duration-300 transform hover:-translate-y-1"
-                    aria-label="Previous project"
-                >
-                    <LeftArrow />
-                </button>
-
-                <div 
-                  className="relative w-80 md:w-96 h-full [perspective:1200px]"
-                  onTouchStart={onTouchStart}
-                  onTouchEnd={onTouchEnd}
-                >
-                    <div className="relative w-full h-full [transform-style:preserve-3d]">
-                        {projects.map((project, index) => (
-                            <div key={index} style={getCardStyle(index)}>
-                                <ProjectCard {...project} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <button 
-                    onClick={goToNext}
-                    className="hidden md:block absolute md:-right-16 z-20 p-2 border-2 rounded-none
-                               border-pixel-gray-accent text-pixel-gray-accent
-                               dark:border-pixel-red dark:text-pixel-red
-                               hover:bg-pixel-gray-accent dark:hover:bg-pixel-red
-                               hover:text-pixel-black dark:hover:text-black
-                               transition-all duration-300 transform hover:-translate-y-1"
-                    aria-label="Next project"
-                >
-                    <RightArrow />
-                </button>
+            <div className="flex flex-col gap-8">
+                {projects.map((project, index) => (
+                    <ProjectItem key={index} project={project} index={index} />
+                ))}
             </div>
         </section>
     );

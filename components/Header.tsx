@@ -1,173 +1,70 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { ThemeContext } from '../App';
-
-const SunIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="1"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m4.93 17.66 1.41-1.41"></path><path d="m17.66 4.93 1.41-1.41"></path>
-  </svg>
-);
-
-const MoonIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-  </svg>
-);
-
-const MenuIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="3" y1="12" x2="21" y2="12"></line>
-    <line x1="3" y1="6" x2="21" y2="6"></line>
-    <line x1="3" y1="18" x2="21" y2="18"></line>
-  </svg>
-);
-
-const XIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="18" y1="6" x2="6" y2="18"></line>
-    <line x1="6" y1="6" x2="18" y2="18"></line>
-  </svg>
-);
-
-const GithubIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
-);
-
-const LinkedinIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-);
-
-const ResumeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-);
-
+import React, { useState, useEffect } from 'react';
 
 const Header: React.FC = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const themeContext = useContext(ThemeContext);
-
-  const handleScroll = () => {
-    setScrolled(window.scrollY > 20);
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-    return () => {
-      document.body.style.overflow = 'auto'; // Cleanup on unmount
-    };
-  }, [isMenuOpen]);
-
+  const [activeTab, setActiveTab] = useState('home');
 
   const scrollToSection = (id: string) => {
+    setActiveTab(id);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleMobileLinkClick = (id: string) => {
-    scrollToSection(id);
-    setIsMenuOpen(false);
-  }
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'about', 'projects', 'skills', 'contact'];
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // If the section is near the top of the viewport
+          if (rect.top >= -100 && rect.top <= 300) {
+            setActiveTab(section);
+          }
+        }
+      }
+    };
 
-  const navLinks = [
-    { id: 'home', name: 'Home' },
-    { id: 'about', name: 'About' },
-    { id: 'projects', name: 'Projects' },
-    { id: 'skills', name: 'Skills' },
-    { id: 'contact', name: 'Contact' },
+    const container = document.getElementById('main-editor');
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      return () => container.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
+  const tabs = [
+    { id: 'home', name: 'home' },
+    { id: 'about', name: 'about' },
+    { id: 'projects', name: 'projects' },
+    { id: 'skills', name: 'skills' },
+    { id: 'contact', name: 'contact' },
   ];
-
-  const socialLinks = [
-    { href: 'https://github.com/vaddethrishank', icon: <GithubIcon />, label: 'GitHub' },
-    { href: 'https://www.linkedin.com/in/vaddethrishank/', icon: <LinkedinIcon />, label: 'LinkedIn' },
-    { href: 'https://drive.google.com/file/d/1BabxbMlOC1eZLNTWK7Pz3O9GNQLk6rk8/view?usp=sharing', icon: <ResumeIcon />, label: 'Resume' },
-  ];
-
-  const baseClasses = 'fixed top-0 left-0 w-full z-40 transition-all duration-300 font-press-start';
-  const scrolledClasses = scrolled ? 'py-2 glassmorphic' : 'py-4';
 
   return (
-    <>
-      <header className={`${baseClasses} ${scrolledClasses}`}>
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <div className="text-lg cursor-pointer hover:animate-pixel-glow text-pixel-gray-accent dark:text-pixel-red transition-all duration-300" onClick={() => scrollToSection('home')}>
-            VT.PF
-          </div>
-          <nav className="hidden md:flex items-center space-x-6 text-xs">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="hover:text-pixel-gray-accent dark:hover:text-pixel-red transition-colors duration-200"
-              >
-                {link.name}
-              </button>
-            ))}
-            <button onClick={themeContext?.toggleTheme} className="p-2 border-2 border-transparent hover:border-current rounded-none">
-              {themeContext?.theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+    <div className="flex bg-[#0a0a0a] border-b border-term-green/20 overflow-x-auto select-none z-20 text-sm md:text-base font-vt323 tracking-widest relative">
+      <div className="flex w-full">
+        {tabs.map((tab, index) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => scrollToSection(tab.id)}
+              className={`flex items-center px-4 py-2 transition-all duration-200 whitespace-nowrap outline-none uppercase
+                ${isActive 
+                  ? 'bg-term-green text-black font-bold shadow-[0_0_10px_rgba(57,255,20,0.5)_inset]' 
+                  : 'text-term-gray/60 hover:text-term-green hover:bg-term-green/5 border-r border-term-green/10'
+                }`}
+            >
+              <span className={isActive ? 'text-black/60 mr-2' : 'text-term-green/40 mr-2'}>{index}:</span>
+              {tab.name}
+              {isActive && <span className="ml-2 animate-blink text-black/80">█</span>}
             </button>
-          </nav>
-          <div className="md:hidden">
-            <button onClick={() => setIsMenuOpen(true)} className="p-1">
-              <MenuIcon />
-            </button>
-          </div>
+          );
+        })}
+        {/* Fill remaining space with a mock status string */}
+        <div className="flex-grow bg-[#0a0a0a] border-l border-term-green/10 hidden md:flex justify-end items-center px-4 text-term-gray/40 text-xs tracking-widest">
+          "portfolio_v1.0" [readonly] -- 100% --
         </div>
-      </header>
-
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-pixel-gray-bg/95 dark:bg-pixel-black/95 backdrop-blur-sm animate-fade-in">
-          <div className="container mx-auto px-4 flex justify-end pt-5">
-            <button onClick={() => setIsMenuOpen(false)}>
-              <XIcon />
-            </button>
-          </div>
-          <nav className="flex flex-col items-center justify-center h-full -mt-12 space-y-8">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => handleMobileLinkClick(link.id)}
-                className="font-press-start text-2xl hover:text-pixel-gray-accent dark:hover:text-pixel-red transition-colors duration-200"
-              >
-                {link.name}
-              </button>
-            ))}
-
-            <div className="absolute bottom-24 flex space-x-6">
-              {socialLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.label}
-                  className="p-3 border-2 rounded-full transition-all duration-300 transform hover:scale-110
-                                    border-pixel-gray-text/80 dark:border-pixel-white/80
-                                    hover:bg-pixel-gray-accent hover:border-pixel-gray-accent
-                                    dark:hover:bg-pixel-red dark:hover:border-pixel-red"
-                >
-                  {link.icon}
-                </a>
-              ))}
-            </div>
-
-            <button onClick={() => {
-              themeContext?.toggleTheme();
-              setIsMenuOpen(false);
-            }} className="absolute bottom-10 p-4 border-2 border-transparent hover:border-current rounded-none">
-              {themeContext?.theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-            </button>
-          </nav>
-        </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 
