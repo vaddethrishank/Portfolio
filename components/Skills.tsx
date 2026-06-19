@@ -2,19 +2,55 @@ import React from 'react';
 import useOnScreen from '../hooks/useOnScreen';
 
 const skillsData = {
-  'Programming Languages': [
-    'C++','JavaScript ', 'SQL', 'HTML', 'CSS'
+  "Programming Languages": [
+    "C++",
+    "Python",
+    "JavaScript",
+    "SQL",
+    "Go"
   ],
-  'Full-Stack Web Development': [
-    'React.js', 'Tailwind CSS', 'Responsive Design',
-    'Node.js', 'Express.js', 'PostgreSQL', 'MySQL',
-    'REST APIs', 'WebSockets'
+
+  "Backend Development": [
+    "FastAPI",
+    "Flask",
+    "Node.js",
+    "Express.js",
+    "REST APIs",
+    "WebSockets"
   ],
-  'AI & ML': [
-    'LangChain', 'LangGraph', 'AI Agents', 'AI Workflows'
+
+  "Frontend Development": [
+    "React.js",
+    "Next.js",
+    "Tailwind CSS",
+    "Responsive Design",
+    "TypeScript"
   ],
-  'Tools & Platforms': [
-    'Git', 'VS Code', 'Supabase', 'Chrome DevTools', 'Google Colab'
+
+  "Databases & Caching": [
+    "PostgreSQL",
+    "Redis",
+    "MySQL",
+    "Supabase",
+    "pgvector"
+  ],
+
+  "AI & LLM Engineering": [
+    "RAG",
+    "LangChain",
+    "LangGraph",
+    "AI Agents",
+    "Vector Search",
+    "Prompt Engineering"
+  ],
+
+  "Tools & Platforms": [
+    "Git",
+    "GitHub",
+    "VS Code",
+    "Vercel",
+    "Render",
+    "Google Colab"
   ]
 };
 

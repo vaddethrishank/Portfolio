@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
             <a href="https://github.com/vaddethrishank" className="hover:text-pixel-gray-accent dark:hover:text-pixel-red transition-colors"><GithubIcon /></a>
             <a href="https://www.linkedin.com/in/vaddethrishank/" className="hover:text-pixel-gray-accent dark:hover:text-pixel-red transition-colors"><LinkedinIcon /></a>
         </div>
-        <p>&copy; {new Date().getFullYear()} PIXEL PORTFOLIO. ALL RIGHTS RESERVED.</p>
+        <p>&copy; {new Date().getFullYear()}</p>
       </div>
     </footer>
   );

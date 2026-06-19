@@ -3,6 +3,14 @@ import ProjectCard from './ProjectCard';
 import useOnScreen from '../hooks/useOnScreen';
 
 const projects = [
+
+    {
+    title: 'Kiwin',
+    description: 'Kiwin is a full-stack AI platform that empowers users to create and deploy custom AI assistants with no coding required. Built using Next.js, FastAPI, Supabase, pgvector, and Google Gemini, it supports document ingestion, semantic search, Retrieval-Augmented Generation (RAG), and tool integrations. Kiwin enables businesses and individuals to build domain-specific AI agents for customer support, knowledge management, research, and workflow automation in minutes.',
+    imageUrl: '/kiwin.png',
+    liveUrl: 'https://kiwin-v2.vercel.app/',
+    repoUrl: 'https://github.com/vaddethrishank/Kiwin',
+  },
   {
     title: 'Gol-Gol ',
     description: 'Full-stack ride-sharing platform to book/find rides based on similar routes. Features smart route-matching using geolocation and distance heuristics, OTP login, real-time updates via WebSockets, and in-app chat for matched users.',
@@ -30,6 +38,8 @@ title: 'FormMind – RAG-Powered Form Assistant',
     liveUrl: 'https://vaddethrishank.github.io/Simon-Game/',
     repoUrl: 'https://github.com/vaddethrishank/Simon-Game.git',
   }
+  
+
 ];
 
 
